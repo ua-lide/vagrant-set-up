@@ -4,7 +4,7 @@ LIDE est composé de deux application : une application PHP basé sur le framewo
 
 ## Pré requis :
 
-* [Vagrant](https://www.vagrantup.com/) : Télécharger la dernière version. Vagrant est un outils permettant la gestion de machine virtuelle pour le développement. La mise à disposition de "box", des machine virtuelles déjà configuré, permet de rapidement mettre en place un environnement de développement.
+* [Vagrant](https://www.vagrantup.com/) : Télécharger la dernière version. Vagrant est un outils permettant la gestion de machine virtuelle pour le développement. La mise à disposition de "box", des machine virtuelles déjà configuré, permet de rapidement mettre en place un environnement de développement. **Ne pas l'installer le gestionnaire de paquet, vous n'aurez pas la bonne version**
 * VirtualBox s'il n'est pas déjà installé. Voir la [documentation ubuntu](https://doc.ubuntu-fr.org/virtualbox)
 
 ## Mise en place d'Homestead pour l'application symfony
@@ -48,14 +48,57 @@ sites:
       type: symfony2
 ```
 
-Vous pouvez maintenant modifier votre fichier ``/etc/hosts```pour faire pointer l'adresse lide.test vers l'ip de votre box (c'est la ligne ip: "XXXXXX" de votre Homestead.yaml).
+Vous pouvez maintenant modifier votre fichier `/etc/hosts` pour faire pointer l'adresse lide.test vers l'ip de votre box (c'est la ligne ip: "XXXXXX" de votre Homestead.yaml, par défaut 192.168.10.10.). Ajouter la ligne suivante à votre fichier /etc/hosts :
+```
+192.168.10.10 lide.test
+```
 
 Ensuite, deplacer vous dans le dossier où vous avez installer homestead, puis lancer la box avec ``vagrant up``.
 
 Vous pouvez ensuite vous connectez à votre machine virtuelle avec la commande ``vagrant ssh``. 
 
-## Installation de la box pour l'autre appli
+Une fois connecter à la machine virtuel, déplacer vous dans le repertoire du projet (`cd ~/LIDE`), puis lancer les commandes suivantes
+* `composer install`
+  * Cette commande va vous demander de renseigner les paramètres suivants :
+  ```
+  database_host: localhost
+  database_port: 3306
+  database_name: lide_db
+  database_user: homestead
+  database_password: secret
+  mailer_transport: smtp
+  mailer_host: smtp.gmail.com
+  mailer_user: null
+  mailer_password: null
+  mailer_auth_mode: login
+  mailer_encryption: ssl
+  secret: ThisTokenIsNotSoSecretChangeIt
+  ssh_host: 192.168.10.1
+  ssh_login: etudiant
+  ssh_password: [votre mot de passe]
+  ssh_port: 22
+  wget_adr: 'http://lide.test'
+  docker_stop_timeout: 120
+  docker_memory: 10M
+  docker_cpu: 1
+  add_hosts: 'lide.test:192.168.10.10'
+  docker_name_prefix: lide_
+  mails_suffixe:
+      - etud.univ-angers.fr
+      - univ-angers.fr
+  ```
+* `npm install` (Installation des paquets javascript)
+* `npm install gulp -g` (Installation global de gulp)
+* `gulp all` (Deployement des assets fontend)
+* `php app/console doctrine:database:create` (création de la base de données)
+* `php app/console doctrine:schema:create` (création des tables)
+* `php app/console doctrine:fixtures:load` (chargement des fixtures, cad des données dans la base)
+
+Vous pouvez maintenant accèder au site depuis votre navigateur à l'adresse `lide.test`. Vous pouvez vous connectez en administrateur avec le nom d'utilisateur `admin` et le mot de passe `admin`
+
+## [WIP] Installation de la box pour l'autre appli
 TODO
 
-### Installation de l'appli Flask
-TODO
+### Installation de l'appli serveur Docker
+
+* Cloner le repertoire 
