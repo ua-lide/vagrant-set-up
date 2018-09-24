@@ -37,6 +37,11 @@ cd /path/to/install/folder
 git clone git@gitlab.com:ua-lide/lide.git /path/to/project/folder
 ```
 
+Puis placer vous sur la branche develop
+```
+cd /path/to/project/folder && git checkout develop 
+```
+
 * Ensuite, dans le dossier d'installation de Homestead, ouvrer le fichier ``Homestead.yaml`` puis ajouter (si les categories folder et sites existe déjà, ajouter à la suite. Regarder la docs d'Homestead pour comprendre ce qui est fait)
 ```
 folders:
