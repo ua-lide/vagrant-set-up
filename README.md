@@ -102,8 +102,14 @@ Une fois connecter à la machine virtuel, déplacer vous dans le repertoire du p
 Vous pouvez maintenant accèder au site depuis votre navigateur à l'adresse `lide.test`. Vous pouvez vous connectez en administrateur avec le nom d'utilisateur `admin` et le mot de passe `admin`
 
 ## [WIP] Installation de la box pour l'autre appli
-TODO
 
-### Installation de l'appli serveur Docker
-
-* Cloner le repertoire 
+* Cloner le repertoire [Lide Project Manager App](https://gitlab.com/ua-lide/lide-project-manager-app) :
+    * `git clone git@gitlab.com:ua-lide/lide-project-manager-app.git
+* Deplacer vous dans le repertoire du projet, puis installer les dépendances composer : 
+    * `composer install --ignore-platform-reqs` 
+* Initialiser la box : `php vendor/bin/homestead make`
+* Copier le Homestead-example.yaml vers Homestead.yaml : `cp Homestead-example.yaml Homestead.yaml`
+* Adapter le contenu du fichier : verifier le mapping des dossiers
+* Demarer la box : `vagrant up`
+* Connecter vous à la box : `vagrant ssh`
+* Deplacer vous dans le repertoire du projet sur la box (normalement `~/code`), puis lancer `composer install` pour verifier que toutes les dépendances systèmes sont bien installer.
