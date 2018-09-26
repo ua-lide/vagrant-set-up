@@ -101,7 +101,7 @@ Une fois connecter à la machine virtuel, déplacer vous dans le repertoire du p
 
 Vous pouvez maintenant accèder au site depuis votre navigateur à l'adresse `lide.test`. Vous pouvez vous connectez en administrateur avec le nom d'utilisateur `admin` et le mot de passe `admin`
 
-## [WIP] Installation de la box pour l'autre appli
+# Installation de la box pour l'autre appli
 
 * Cloner le repertoire [Lide Project Manager App](https://gitlab.com/ua-lide/lide-project-manager-app) :
     * `git clone git@gitlab.com:ua-lide/lide-project-manager-app.git
@@ -113,3 +113,59 @@ Vous pouvez maintenant accèder au site depuis votre navigateur à l'adresse `li
 * Demarer la box : `vagrant up`
 * Connecter vous à la box : `vagrant ssh`
 * Deplacer vous dans le repertoire du projet sur la box (normalement `~/code`), puis lancer `composer install` pour verifier que toutes les dépendances systèmes sont bien installer.
+
+# Faire communiquer les deux machines virtuelles
+
+Afin de faire communiquer les deux machines virtuelles, ajouter les lignes suivantes dans le `Homestead.yaml` de chaque machine :
+```
+networks:
+    - type: "private_network"
+      ip: "[ip de la box]"
+```
+
+Lancer ensuite la commande `vagrant reload --provision` dans chacun des dossiers contenant les machines virtuelles afin de mettre à jour la configuration.
+
+Ensuite, nous allons configurer l'application web afin qu'elle utilise la box de Lide Project Manager pour lancer les conteneurs. Dans le dossier du projet Lide, ouvrez le fichier `app/config/parameter.yml`, et modifier les valeurs des paramètres suivants :
+```
+    ssh_host: 192.168.10.11 #Ip de la box du Lide Project Manager
+    ssh_login: vagrant
+    ssh_password: vagrant
+    ssh_port: 22
+```
+
+## Monter l'image docker du c++ dans la box du Lide Project Manager
+
+Connecter vous en ssh à la box du Lide Manager Project
+```
+cd /path/to/lide/manager/project && vagrant ssh
+```
+
+Créer un dossier docker et déplacer vous dedans
+```
+mkdir docker && cd docker
+```
+
+Créer un fichier Dockerfile en l'ouvrant avec nano ou vim
+```
+nano Dockerfile
+```
+
+Copier coller le contenu du fichier suivant : https://gitlab.com/ua-lide/lide/blob/develop/docker/Dockerfile
+
+Construire ensuite l'image docker
+```
+docker build -t gpp .
+```
+
+Vérifier qu'il n'y a pas d'erreur.
+
+Executer ensuite la commande
+```
+docker images 
+``` 
+
+Vous aurez normalement une sortie similaire à celle ci :
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+gpp                 latest              53378015f1e8        28 hours ago        375MB
+```
