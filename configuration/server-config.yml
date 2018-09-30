@@ -1,0 +1,23 @@
+- hostname: "web-front"
+  ip: "192.168.50.4"
+  box: "ubuntu/trusty64"
+  apache: "lide.test.conf"
+  synced_folders:
+    - src: "C:\\Users\\fonfo\\Documents\\home\\repogit\\lide"
+      dest: "/var/www/LIDE"
+      type: "symfony" # Permet d'activer la creation automatique des schemas en base avec symfony
+  provision:
+    - "provision/common/common.sh"
+    - "provision/apache/apache2.sh"
+    - "provision/mariadb/mariadb.sh"
+    - "provision/php/php7.2.sh"
+    - "provision/misc/misc-web.sh"
+
+- hostname: "web-back"
+  ip: "192.168.50.5"
+  box: "ubuntu/trusty64"
+  provision:
+    - "provision/common/common.sh"
+    - "provision/docker/docker.sh"
+    - "provision/apache/apache2.sh"
+    - "provision/php/php7.2.sh"
