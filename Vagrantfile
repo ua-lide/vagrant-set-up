@@ -10,10 +10,10 @@ def custom_synced_folders(vm, host)
   if host.has_key?('synced_folders')
     folders = host['synced_folders']
     folders.each do |folder|
-      vm.synced_folder folder['src'], folder['dest']
+      vm.synced_folder folder['src'], folder['dest'], folder['options']
       if folder.has_key?('type')
         if folder['type'] == "symfony"
-          symfony_setup = "provision/symfony/symfony_setup_db.sh"
+          symfony_setup = "provision/symfony/symfony_setup.sh"
           vm.provision :shell, path: "#{symfony_setup}", args: folder['dest']
         end
       end
