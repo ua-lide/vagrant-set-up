@@ -14,6 +14,9 @@ def custom_synced_folders(vm, host)
       if folder.has_key?('type')
         if folder['type'] == "symfony"
           symfony_setup = "provision/symfony/symfony_setup.sh"
+          symfony_parameters_host = "files/symfony.conf.d/parameters.yml"
+          symfony_parameters_guest = "/home/vagrant/parameters.yml"
+          vm.provision "file", source: "#{symfony_parameters_host}", destination: "#{symfony_parameters_guest}"
           vm.provision :shell, path: "#{symfony_setup}", args: folder['dest']
         end
       end
