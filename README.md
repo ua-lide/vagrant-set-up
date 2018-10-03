@@ -14,12 +14,24 @@ Clonez le repogit des sources du projet où vous le faites habituellement :
 git clone git@gitlab.com:ua-lide/lide.git
 ```
 
+Placez vous dans le repertoire `lide` :
+```
+cd lide
+```
+
+Placez vous sur la branche ``develop`` :
+```
+git checkout develop
+```
+
+
+
 Clonez le repogit des sources pour le déploiement où vous le faites habituellement :
 ```
 git clone git@gitlab.com:ua-lide/vagrant-set-up.git
 ```
 
-Placez vous dans votre repogit local des sources pour le déploiement :
+Placez vous dans votre repo git local des sources pour le déploiement :
 ```
 cd vagrant-set-up
 ```
