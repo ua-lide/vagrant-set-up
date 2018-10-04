@@ -9,14 +9,16 @@ cd "$symfony_dir"
 
 composer install -n
 sudo mv "$parameters_src" "$parameters_dest"
-php app/console cache:clear --no-warmup
+php bin/console cache:clear --no-warmup
 
-sudo npm install
-sudo npm install gulp -g
+sudo yarn install
+sudo global add gulp
 gulp all
 
-php app/console doctrine:database:create
-php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load
+sudo yarn encore dev
+
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
+php bin/console doctrine:fixtures:load
 
 ln -s "$symfony_dir" "$www_dir"

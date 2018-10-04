@@ -2,6 +2,6 @@
 
 symfony_dir="$1"
 cd "$symfony_dir"
-php app/console doctrine:database:create
-php app/console doctrine:schema:create
-php app/console doctrine:fixtures:load
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:create
+php bin/console doctrine:fixtures:load
