@@ -66,6 +66,8 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
 - hostname: "web-back"
   ip: "192.168.50.5"
   box: "ubuntu/trusty64"
+  docker:
+    - "gpp" # Le nom du dockerfile sera le nom de l'image sur le guest
   provision:
     - "provision/common/common.sh"
     - "provision/docker/docker.sh"
