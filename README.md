@@ -36,7 +36,7 @@ Placez vous dans votre repo git local des sources pour le déploiement :
 cd vagrant-set-up
 ```
 
-Placez vous dans la branche ``feature/setup-auto`` :
+Placez vous sur la branche ``feature/setup-auto`` :
 ```
 git checkout feature/setup-auto
 ```
