@@ -44,6 +44,19 @@ def conf_apache(vm, host)
   end
 end
 
+def create_image_docker(vm, host)
+  if host.has_key?('docker')
+    dockerfiles = host['docker']
+    create_image_script = "provision/docker/create_image_docker.sh"
+    dockerfile_dir_guest = "/home/vagrant"
+    dockerfile_dir_host = "files/dockerfile.d"
+    dockerfiles.each do |dockerfile|
+      vm.provision "file", source: "#{dockerfile_dir_host}/#{dockerfile}", destination: "#{dockerfile_dir_guest}/#{dockerfile}"
+      vm.provision :shell, path: "#{create_image_script}", args: "#{dockerfile}"
+    end
+  end
+end
+
 Vagrant.configure(API_VERSION) do |config|
   hosts.each do |host|
     config.vm.define host['hostname'] do |node|
@@ -53,6 +66,7 @@ Vagrant.configure(API_VERSION) do |config|
       provisionning(node.vm,host)
       custom_synced_folders(node.vm,host)
       conf_apache(node.vm,host)
+      create_image_docker(node.vm,host)
     end
   end
 end

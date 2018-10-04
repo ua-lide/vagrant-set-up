@@ -4,7 +4,7 @@ LIDE est composé de deux application : une application PHP basé sur le framewo
 
 ## Pré requis :
 
-* [Vagrant](https://www.vagrantup.com/) : Télécharger la dernière version. Vagrant est un outils permettant la gestion de machine virtuelle pour le développement. La mise à disposition de "box", des machine virtuelles déjà configuré, permet de rapidement mettre en place un environnement de développement. **Ne pas l'installer le gestionnaire de paquet, vous n'aurez pas la bonne version**
+* [Vagrant](https://www.vagrantup.com/) : Télécharger la dernière version. Vagrant est un outils permettant la gestion de machine virtuelle pour le développement. La mise à disposition de "box", des machine virtuelles déjà configuré, permet de rapidement mettre en place un environnement de développement. **Ne pas l'installer via le gestionnaire de paquet, vous n'aurez pas la bonne version**
 * VirtualBox s'il n'est pas déjà installé. Voir la [documentation ubuntu](https://doc.ubuntu-fr.org/virtualbox)
 
 ## Mise en place (Distribution local sous Linux)
@@ -14,14 +14,31 @@ Clonez le repogit des sources du projet où vous le faites habituellement :
 git clone git@gitlab.com:ua-lide/lide.git
 ```
 
+Placez vous dans le repertoire `lide` :
+```
+cd lide
+```
+
+Placez vous sur la branche ``develop`` :
+```
+git checkout develop
+```
+
+
+
 Clonez le repogit des sources pour le déploiement où vous le faites habituellement :
 ```
 git clone git@gitlab.com:ua-lide/vagrant-set-up.git
 ```
 
-Placez vous dans votre repogit local des sources pour le déploiement :
+Placez vous dans votre repo git local des sources pour le déploiement :
 ```
 cd vagrant-set-up
+```
+
+Placez vous sur la branche ``feature/setup-auto`` :
+```
+git checkout feature/setup-auto
 ```
 
 Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettre le chemin des sources du projet que vous venez de cloner :
@@ -49,6 +66,8 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
 - hostname: "web-back"
   ip: "192.168.50.5"
   box: "ubuntu/trusty64"
+  docker:
+    - "gpp" # Le nom du dockerfile sera le nom de l'image sur le guest
   provision:
     - "provision/common/common.sh"
     - "provision/docker/docker.sh"
