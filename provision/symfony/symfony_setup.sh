@@ -11,8 +11,7 @@ composer install -n
 sudo mv "$parameters_src" "$parameters_dest"
 php bin/console cache:clear --no-warmup
 
-sudo yarn install
-sudo global add gulp
+sudo yarn global add gulp
 gulp all
 
 sudo yarn encore dev
