@@ -51,11 +51,6 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
     - src: "/path/to/folder" # CHEMIN A CHANGER
       dest: "/home/vagrant/LIDE"
       type: "symfony" # Permet d'activer la creation automatique des schemas en base avec symfony
-      options:
-        :create: true
-        :owner: www-data
-        :group: www-data
-        :mount_options: ['dmode=0755', 'fmode=0644']
   provision:
     - "provision/common/common.sh"
     - "provision/apache/apache2.sh"

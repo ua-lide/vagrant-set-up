@@ -7,10 +7,11 @@ parameters_dest="$symfony_dir/app/config/parameters.yml"
 
 cd "$symfony_dir"
 
-composer install -n
+composer install -n --no-progress --no-suggest
 sudo mv "$parameters_src" "$parameters_dest"
 php bin/console cache:clear --no-warmup
 
+sudo npm install
 sudo yarn global add gulp
 gulp all
 

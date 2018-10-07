@@ -8,3 +8,4 @@ apt-get install -y mariadb-server
 # create database and user
 mysql -u root --password=root -e "CREATE USER 'vagrant' IDENTIFIED BY 'vagrant'"
 mysql -u root --password=root -e "GRANT ALL PRIVILEGES ON lide_db.* TO vagrant@localhost IDENTIFIED BY 'vagrant'"
+mysql -u root --password=root -e "flush privileges"
