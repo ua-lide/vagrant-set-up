@@ -50,7 +50,12 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
   synced_folders:
     - src: "/path/to/folder" # CHEMIN A CHANGER
       dest: "/home/vagrant/LIDE"
-      type: "symfony" # Permet d'activer la creation automatique des schemas en base avec symfony
+      type: "symfony_app" # Permet d'activer la creation automatique des schemas en base avec symfony
+      options:
+        :create: true
+        :owner: www-data
+        :group: vagrant
+        :mount_options: ['dmode=0775', 'fmode=0664']
   provision:
     - "provision/common/common.sh"
     - "provision/apache/apache2.sh"
@@ -61,8 +66,18 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
 - hostname: "web-back"
   ip: "192.168.50.5"
   box: "ubuntu/trusty64"
+  apache: "lide-pma.conf"
   docker:
     - "gpp" # Le nom du dockerfile sera le nom de l'image sur le guest
+  synced_folders:
+    - src: "/path/to/folder" # CHEMIN A CHANGER
+      dest: "/home/vagrant/lide-pma"
+      type: "symfony_metier"
+      options:
+        :create: true
+        :owner: www-data
+        :group: vagrant
+        :mount_options: ['dmode=0775', 'fmode=0664']
   provision:
     - "provision/common/common.sh"
     - "provision/docker/docker.sh"

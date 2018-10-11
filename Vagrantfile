@@ -12,9 +12,16 @@ def custom_synced_folders(vm, host)
     folders.each do |folder|
       vm.synced_folder folder['src'], folder['dest'], folder['options']
       if folder.has_key?('type')
-        if folder['type'] == "symfony"
-          symfony_setup = "provision/symfony/symfony_setup.sh"
-          symfony_parameters_host = "files/symfony.conf.d/parameters.yml"
+        if folder['type'] == "symfony_app"
+          symfony_setup = "provision/symfony/symfony_setup_app.sh"
+          symfony_parameters_host = "files/symfony.conf.d/parameters_app.yml"
+          symfony_parameters_guest = "/home/vagrant/parameters.yml"
+          vm.provision "file", source: "#{symfony_parameters_host}", destination: "#{symfony_parameters_guest}"
+          vm.provision :shell, path: "#{symfony_setup}", args: folder['dest']
+        end
+        if folder['type'] == "symfony_metier"
+          symfony_setup = "provision/symfony/symfony_setup_metier.sh"
+          symfony_parameters_host = "files/symfony.conf.d/parameters_metier.yml"
           symfony_parameters_guest = "/home/vagrant/parameters.yml"
           vm.provision "file", source: "#{symfony_parameters_host}", destination: "#{symfony_parameters_guest}"
           vm.provision :shell, path: "#{symfony_setup}", args: folder['dest']
