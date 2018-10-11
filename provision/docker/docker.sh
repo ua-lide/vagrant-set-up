@@ -2,8 +2,6 @@
 
 apt-get remove -y docker docker-engine docker.io
 
-apt-get update -y
-
 apt-get install -y \
     apt-transport-https \
     ca-certificates \

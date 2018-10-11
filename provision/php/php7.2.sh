@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Installation PHP 7.2
-apt-get update -y && apt-get upgrade -y
-
 apt-get install -y python-software-properties
 
 add-apt-repository -y ppa:ondrej/php

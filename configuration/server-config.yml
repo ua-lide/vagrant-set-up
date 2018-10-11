@@ -6,6 +6,12 @@
     - src: "/home/etudiant/repogit/lide"
       dest: "/home/vagrant/LIDE"
       type: "symfony" # Permet d'activer la creation automatique des schemas en base avec symfony
+      options:
+        :create: true
+        :owner: www-data
+        :group: vagrant
+        :mount_options: ['dmode=0775', 'fmode=0664']
+
   provision:
     - "provision/common/common.sh"
     - "provision/apache/apache2.sh"

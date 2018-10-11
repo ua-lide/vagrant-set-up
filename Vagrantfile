@@ -39,8 +39,6 @@ def conf_apache(vm, host)
     apache_conf_dir_guest = "/home/vagrant"
     apache_setup = "provision/apache/apache2_setup.sh"
     conf = host['apache']
-    envvars = "envvars"
-    vm.provision "file", source: "#{apache_conf_dir_host}/#{envvars}", destination: "#{apache_conf_dir_guest}/#{envvars}"
     vm.provision "file", source: "#{apache_conf_dir_host}/#{conf}", destination: "#{apache_conf_dir_guest}/#{conf}"
     vm.provision :shell, path: "#{apache_setup}", args: "#{conf}"
   end
