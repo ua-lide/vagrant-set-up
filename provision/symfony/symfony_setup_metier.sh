@@ -18,3 +18,5 @@ git submodule update --init
 ln -s "$symfony_dir" "$www_dir"
 
 mkdir "$lide_storage_dir"
+
+sudo usermod -aG docker www-data
