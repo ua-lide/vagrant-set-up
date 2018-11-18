@@ -10,7 +10,7 @@
         :create: true
         :owner: www-data
         :group: vagrant
-        :mount_options: ['dmode=0775', 'fmode=0664']
+        :mount_options: ['dmode=0775', 'fmode=0775']
   provision:
     - "provision/common/common.sh"
     - "provision/apache/apache2.sh"
@@ -32,7 +32,7 @@
         :create: true
         :owner: www-data
         :group: vagrant
-        :mount_options: ['dmode=0775', 'fmode=0664']
+        :mount_options: ['dmode=0775', 'fmode=0775']
   provision:
     - "provision/common/common.sh"
     - "provision/docker/docker.sh"
