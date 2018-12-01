@@ -97,3 +97,10 @@ Si vous souhaitez accéder aux VMs :
 vagrant ssh <nom_vm>
 ```
 Par défaut les noms des deux VMs crées sont `web-front` et `web-back`
+
+## Mise en place du ssl
+
+Générer des certificats auto-signés pour la partie applicative :
+```
+sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -out /etc/apache2/ssl/lide/lide.crt -keyout /etc/apache2/ssl/lide/lide.key
+```
