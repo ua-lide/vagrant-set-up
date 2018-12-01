@@ -85,13 +85,6 @@ Lancez la création des VMs :
 vagrant up
 ```
 
-Une fois la création des VMs terminée vous pouvez accéder à l'application à l'URL suivante :
-```
-http://192.168.50.4/
-OU
-http://192.168.50.4/app_dev.php (pour la version en mode développeur)
-```
-
 Si vous souhaitez accéder aux VMs :
 ```
 vagrant ssh <nom_vm>
@@ -100,7 +93,20 @@ Par défaut les noms des deux VMs crées sont `web-front` et `web-back`
 
 ## Mise en place du ssl
 
-Générer des certificats auto-signés pour la partie applicative :
+Si ce n'est pas déjà fait, ajoutez le FQDN de la partie applicative dans votre host :
 ```
+sudo echo "192.168.50.4   www.lide.test" >> /etc/hosts
+```
+
+Générer des certificats auto-signés pour la partie applicative (web-front) :
+```
+vagrant ssh web-front
 sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -out /etc/apache2/ssl/lide/lide.crt -keyout /etc/apache2/ssl/lide/lide.key
+```
+
+Vous pouvez accéder à l'application à l'URL suivante :
+```
+http://www.lide.test/
+OU
+http://www.lide.test/app_dev.php (pour la version en mode développeur)
 ```
