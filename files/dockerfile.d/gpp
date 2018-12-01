@@ -1,0 +1,9 @@
+FROM debian
+
+MAINTAINER Jerome<jerome.martinsmosca@etud.univ-angers.fr>
+
+# Application
+RUN apt-get update
+RUN apt-get install -y wget ssh g++
+
+WORKDIR /home

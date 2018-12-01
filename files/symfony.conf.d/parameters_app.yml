@@ -1,0 +1,27 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: lide_db
+    database_user: vagrant
+    database_password: vagrant
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    mailer_auth_mode: login
+    mailer_encryption: ssl
+    secret: ThisTokenIsNotSoSecretChangeIt
+    ssh_host: 192.168.50.5
+    ssh_login: vagrant
+    ssh_password: vagrant
+    ssh_port: 22
+    wget_adr: 'http://lide.test/'
+    docker_stop_timeout: 120
+    docker_memory: 10M
+    docker_cpu: 1
+    mails_suffixe:
+        - etud.univ-angers.fr
+        - univ-angers.fr
+    add_hosts: 'lide.test:192.168.50.4'
+    docker_name_prefix: lide_
