@@ -36,11 +36,6 @@ Placez vous dans votre repo git local des sources pour le déploiement :
 cd vagrant-set-up
 ```
 
-Placez vous sur la branche ``feature/setup-auto`` :
-```
-git checkout feature/setup-auto
-```
-
 Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettre le chemin des sources du projet que vous venez de cloner :
 ```yaml
 - hostname: "web-front"
