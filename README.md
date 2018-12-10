@@ -9,6 +9,8 @@ LIDE est composé de deux application : une application PHP basé sur le framewo
 
 ## Mise en place (Distribution local sous Linux)
 
+### Sources de la partie applicative
+
 Clonez le repogit des sources du projet où vous le faites habituellement :
 ```
 git clone git@gitlab.com:ua-lide/lide.git
@@ -24,7 +26,49 @@ Placez vous sur la branche ``develop`` :
 git checkout develop
 ```
 
+### Sources de la partie métier
 
+Clonez le repogit des sources du projet où vous le faites habituellement :
+```
+git clone git@gitlab.com:ua-lide/lide-project-manager-app.git
+```
+
+Placez vous dans le repertoire `lide` :
+```
+cd lide-project-manager-app
+```
+
+Placez vous sur la branche ``develop`` :
+```
+git checkout develop
+```
+
+### Mise en place du JWT
+
+Placez vous dans les sources de la partie applicative :
+```
+cd lide
+```
+
+Générer les clefs pour le JWT (mettez la même passphrase partout) :
+```
+mkdir -p config/jwt
+openssl genrsa -out config/jwt/private.pem -aes256 4096
+openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+openssl rsa -in config/jwt/private.pem -out config/jwt/private2.pem
+mv config/jwt/private.pem config/jwt/private.pem-back
+mv config/jwt/private2.pem config/jwt/private.pem
+```
+
+**/!\ Lancez les commandes de openssl une a une sinon la génération des clefs va échouer**
+
+Copier `config/jwt/public.pem` dans les sources de lide-project-manager-app :
+```
+mkdir -p ../lide-project-manager-app/config/jwt
+cp config/jwt/public.pem ../lide-project-manager-app/config/jwt/
+```
+
+### Sources pour le déploiement
 
 Clonez le repogit des sources pour le déploiement où vous le faites habituellement :
 ```
@@ -43,7 +87,7 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
   box: "ubuntu/trusty64"
   apache: "lide.test.conf"
   synced_folders:
-    - src: "/path/to/folder" # CHEMIN A CHANGER
+    - src: "/path/to/folder" # CHEMIN A CHANGER VERS LES SOURCES DE LA PARTIE APPLICATIVE : LIDE
       dest: "/home/vagrant/LIDE"
       type: "symfony_app" # Permet d'activer la creation automatique des schemas en base avec symfony
       options:
@@ -65,7 +109,7 @@ Modifiez `server-config.yml` situé dans le dossier `configuration` pour y mettr
   docker:
     - "gpp" # Le nom du dockerfile sera le nom de l'image sur le guest
   synced_folders:
-    - src: "/path/to/folder" # CHEMIN A CHANGER
+    - src: "/path/to/folder" # CHEMIN A CHANGER VERS LES SOURCES DE LA PARTIE METIER : LIDE PROJECT MANAGER APP
       dest: "/home/vagrant/lide-pma"
       type: "symfony_metier"
       options:
@@ -90,19 +134,6 @@ Si vous souhaitez accéder aux VMs :
 vagrant ssh <nom_vm>
 ```
 Par défaut les noms des deux VMs crées sont `web-front` et `web-back`
-
-## Mise en place du ssl
-
-Si ce n'est pas déjà fait, ajoutez le FQDN de la partie applicative dans votre host :
-```
-sudo echo "192.168.50.4   www.lide.test" >> /etc/hosts
-```
-
-Générer des certificats auto-signés pour la partie applicative (web-front) :
-```
-vagrant ssh web-front
-sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -out /etc/apache2/ssl/lide/lide.crt -keyout /etc/apache2/ssl/lide/lide.key
-```
 
 Vous pouvez accéder à l'application à l'URL suivante :
 ```
