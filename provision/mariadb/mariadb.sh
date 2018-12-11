@@ -6,6 +6,7 @@ debconf-set-selections <<< 'mariadb-server-10.0 mysql-server/root_password_again
 apt-get install -y mariadb-server
 
 sudo sed -i 's/bind-address/#bind-address/' /etc/mysql/my.cnf
+sudo service mysql restart
 
 # create database and user
 mysql -u root --password=root -e "CREATE USER 'vagrant' IDENTIFIED BY 'vagrant'"

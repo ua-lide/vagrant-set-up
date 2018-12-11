@@ -135,6 +135,19 @@ vagrant ssh <nom_vm>
 ```
 Par défaut les noms des deux VMs crées sont `web-front` et `web-back`
 
+## Lancer le server Web Socket
+
+Connectez-vous à la VM `web-back`:
+```
+vagrant ssh web-back
+```
+
+Lancez le server Web Socket avec la commande suivante :
+```
+cd lide-pma
+php bin/console lide:start-server
+```
+
 Vous pouvez accéder à l'application à l'URL suivante :
 ```
 http://www.lide.test/

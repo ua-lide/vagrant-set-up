@@ -11,6 +11,7 @@ cd "$symfony_dir"
 composer install -n --no-progress --no-suggest
 sudo mv "$parameters_src" "$parameters_dest"
 php bin/console cache:clear --no-warmup
+php bin/console doctrine:schema:create
 
 git submodule sync
 git submodule update --init
@@ -18,5 +19,6 @@ git submodule update --init
 ln -s "$symfony_dir" "$www_dir"
 
 mkdir "$lide_storage_dir"
+chown www-data:www-data "$lide_storage_dir"
 
 sudo usermod -aG docker www-data
