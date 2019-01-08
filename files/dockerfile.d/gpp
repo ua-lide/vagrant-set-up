@@ -4,6 +4,9 @@ MAINTAINER Jerome<jerome.martinsmosca@etud.univ-angers.fr>
 
 # Application
 RUN apt-get update
-RUN apt-get install -y wget ssh g++
+RUN apt-get install -y g++ make
 
+
+COPY gpp.sh /home/script.sh
+COPY makefile /home/script.sh
 WORKDIR /home
