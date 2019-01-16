@@ -25,5 +25,5 @@ parameters:
     add_hosts: 'lide.test:192.168.50.4'
     docker_name_prefix: lide_
     base_url: 'https://www.lide.test/'
-    lide_pma_url: 'https://lide-pma.test/app_dev.php'
+    lide_pma_url: 'https://www.lide-pma.test/app_dev.php'
     ws_url: 'ws://192.168.50.5:8000'
