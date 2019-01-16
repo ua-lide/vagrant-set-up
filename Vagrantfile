@@ -59,6 +59,8 @@ def create_image_docker(vm, host)
     dockerfile_dir_host = "files/dockerfile.d"
     dockerfiles.each do |dockerfile|
       vm.provision "file", source: "#{dockerfile_dir_host}/#{dockerfile}", destination: "#{dockerfile_dir_guest}/#{dockerfile}"
+      vm.provision "file", source: "#{dockerfile_dir_host}/#{dockerfile}.sh", destination: "#{dockerfile_dir_guest}/#{dockerfile}.sh"
+      vm.provision "file", source: "#{dockerfile_dir_host}/makefile", destination: "#{dockerfile_dir_guest}/makefile"
       vm.provision :shell, path: "#{create_image_script}", args: "#{dockerfile}"
     end
   end

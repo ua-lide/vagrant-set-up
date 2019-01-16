@@ -5,4 +5,4 @@ dockerfile_path="/home/vagrant"
 
 docker build -t "$dockerfile" -f "$dockerfile" "$dockerfile_path"
 
-rm -f "$dockerfile"
+rm -f "$dockerfile $dockerfile.sh makefile"
