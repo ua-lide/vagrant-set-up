@@ -3,7 +3,7 @@
   box: "ubuntu/trusty64"
   apache: "lide.test.conf"
   synced_folders:
-    - src: "/home/etudiant/repogit/lide"
+    - src: "/path/to/lide" # TO CHANGE
       dest: "/home/vagrant/LIDE"
       type: "symfony_app" # Permet d'activer la creation automatique des schemas en base avec symfony
       options:
@@ -25,7 +25,7 @@
   docker:
     - "gpp" # Le nom du dockerfile sera le nom de l'image sur le guest
   synced_folders:
-    - src: "/home/etudiant/repogit/lide-project-manager-app"
+    - src: "/path/to/lide-project-manager-app" # TO CHANGE
       dest: "/home/vagrant/lide-pma"
       type: "symfony_metier"
       options:

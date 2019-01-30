@@ -8,3 +8,5 @@ sudo mv "$home_vagrant/$apache_conf_file" "$apache_conf_dir/sites-available"
 
 a2dissite 000-default.conf
 a2ensite $apache_conf_file
+
+sudo service apache reload
