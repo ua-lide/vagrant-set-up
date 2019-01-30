@@ -8,5 +8,6 @@ RUN apt-get install -y g++ make
 
 
 COPY gpp.sh /home/script.sh
-COPY makefile /home/script.sh
+RUN chmod a+x /home/script.sh
+COPY makefile /home/makefile
 WORKDIR /home

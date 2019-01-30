@@ -7,5 +7,4 @@ CPPFLAGS= -Wall -std=c++11
 
 # compile
 a.out: $(SRC_DIR)/*.cpp
-        g++ -o $@ $^ $(CPPFLAGS)
-
+	g++ -o $@ $^ $(CPPFLAGS)
