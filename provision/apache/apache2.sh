@@ -1,4 +1,4 @@
-apt-get install -y apache2 libapache2-mod-proxy-html libxml2-dev
+apt-get install -y apache2 libapache2-mod-wsgi libxml2-dev python-dev
 
 sudo a2enmod ssl
 sudo a2enmod headers
